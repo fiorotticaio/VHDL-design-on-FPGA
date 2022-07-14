@@ -10,7 +10,7 @@ entity zero_to_seven is
 end zero_to_seven;
 
 architecture arch of zero_to_seven is
-    constant N : integer := 99999999; -- 1 segundo de clk
+    constant N : integer := 499; -- 0,0005 segundo de clk (f = 2000Hz)
     signal divide_clk : integer range 0 to N;
     signal enable : std_logic;
  
@@ -21,14 +21,14 @@ begin
         clk => clk, 
         reset => '0',
         enable => enable,
-        in0 => "1000000",  
-        in1 => "1111001", 
-        in2 => "0100100", 
-        in3 => "0110000", 
-        in4 => "0011001", 
-        in5 => "0010010", 
-        in6 => "0000010", 
-        in7 => "1111000", 
+        in0 => "01000000",  
+        in1 => "01111001", 
+        in2 => "00100100", 
+        in3 => "00110000", 
+        in4 => "00011001", 
+        in5 => "00010010", 
+        in6 => "00000010", 
+        in7 => "01111000", 
         an => an,                
         sseg => sseg              
     );
