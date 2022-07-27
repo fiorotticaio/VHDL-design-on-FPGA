@@ -1,6 +1,13 @@
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
 entity parking is 
     port(
-        
+        sw : in std_logic_vector(2 downto 0);
+        clk: in std_logic;                    
+        an: out std_logic_vector(7 downto 0);  
+        sseg: out std_logic_vector(7 downto 0) 
     );
 end parking;
 
@@ -8,8 +15,12 @@ architecture parking_arch of parking is
     constant N : integer := 49999999; -- half second
     signal enable: std_logic;
     signal divide_clk: integer range 0 to N;
+    
+    signal count : integer := 0;
 
-begin 
+begin
+
+
 
   
 

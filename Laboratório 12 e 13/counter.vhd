@@ -1,20 +1,25 @@
+library ieee;
+use ieee.std_logic_1164.all; 
+use ieee.numeric_std.all;
+
 entity counter is 
     port(
-        sw : in std_logic_vector(1 downto 0);
+        up, down : in std_logic;
+        count : in integer;
+        new_count : out integer;
     );
 end counter;
 
 architecture counter_arch of counter is 
-    signal count : unsigned := 0; -- default value 0
 
 begin
 
-    process(sw, count) 
+    process(up, down, count, new_count) 
     begin
-        if sw(0) = '1' and sw(1) = '0' then
-            count <= count + 1;
-        elsif sw(0) = '0' and sw(1) = '1' then 
-            count <= count - 1;
+        if up = '1' and down = '0' then
+            new_count <= count + 1;
+        elsif up = '0' and down = '1' then 
+            new_count <= count - 1;
         end if;
     end process;
 
