@@ -1,18 +1,19 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
-
 entity hex_to_sseg is
    port(
-      count  : in  unsigned;
-      dp   : in  std_logic;
-      sseg : out std_logic_vector(7 downto 0)
+      q        : in  std_logic_vector(3 downto 0);
+      dp       : in  std_logic;
+      an, sseg : out std_logic_vector(7 downto 0)
    );
 end hex_to_sseg;
 
-architecture arch of hex_to_sseg is
+architecture hex_to_sseg_arch of hex_to_sseg is
 begin
-   with hex select
+
+   an <= "11111110"; -- just show the first dispay (count from 0 to 9)
+
+   with q select
       sseg(6 downto 0) <=
          "1000000" when "0000", -- 0
          "1111001" when "0001", -- 1
@@ -24,5 +25,13 @@ begin
          "1111000" when "0111", -- 7
          "0000000" when "1000", -- 8
          "0010000" when "1001", -- 9
+         "0001000" when "1010", -- A
+         "0000011" when "1011", -- b
+         "1000110" when "1100", -- C
+         "0100001" when "1101", -- d
+         "0000110" when "1110", -- E
+         "0001110" when others; -- F
+
    sseg(7) <= dp;
-end arch;
+   
+end hex_to_sseg_arch;
