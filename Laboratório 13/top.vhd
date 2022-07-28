@@ -16,8 +16,6 @@ architecture parking_arch of parking is
     signal enable: std_logic;
     signal divide_clk: integer range 0 to N;
     
-    signal count : integer := 0;
-
 begin
 
 
