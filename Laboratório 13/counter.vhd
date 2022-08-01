@@ -4,9 +4,9 @@ use ieee.numeric_std.all;
 
 entity counter is
    port(
-      clk, reset, enable : in  std_logic;
-      up, down           : in std_logic;  
-      q                  : out std_logic_vector(3 downto 0)
+      clk, reset : in  std_logic;
+      up, down   : in std_logic;  
+      q          : out std_logic_vector(3 downto 0)
    );
 end counter;
 
@@ -22,9 +22,7 @@ begin
       if (reset='1') then
          r_reg <= (others=>'0');
       elsif (clk'event and clk='1') then
-         if (enable='1') then
-            r_reg <= r_next;
-         end if;
+         r_reg <= r_next;
       end if;
    end process;
 

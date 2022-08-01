@@ -4,9 +4,9 @@ use ieee.numeric_std.all;
 
 entity enter_exit is 
     port(
-        clk, enable: in std_logic;
-        a, b : in std_logic;
-        car_enter, car_exit: out std_logic
+        clk                 : in std_logic;
+        a, b                : in std_logic;
+        car_enter, car_exit : out std_logic
     );
 end enter_exit;
 
@@ -18,9 +18,7 @@ begin
     process(clk)
     begin
         if(rising_edge(clk)) then
-            if (enable = '1') then 
-                estado_atual <= proximo_estado;
-            end if;
+            estado_atual <= proximo_estado;
         end if;
     end process;
 

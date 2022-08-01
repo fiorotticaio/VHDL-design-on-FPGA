@@ -68,7 +68,6 @@ begin
     enter_exit_unity : entity work.enter_exit_unity(enter_exit_arch)
     port map (
         clk       => clk,
-        en        => enable,
         a         => db_tick1,
         b         => db_tick2,
         car_enter => up,
@@ -81,34 +80,10 @@ begin
     port map(
         clk    => clk,
         reset  => '0',
-        enable => enable,
         up     => up,
         down   => down,
         q      => q
     );
-
-    -- two counters
-    -- clr <= btn(0);
-    -- process(clk)
-    -- begin
-    --     if (clk'event and clk='1') then
-    --         q1_reg <= q1_next;
-    --         q0_reg <= q0_next;
-    --     end if;
-    -- end process;
-
-    -- next-state logic for the counter
-    -- q1_next <= (others=>'0') when clr='1' else
-    --             q1_reg + 1   when btn_tick='1' else
-    --             q1_reg;
-
-    -- q0_next <= (others=>'0') when clr='1' else
-    --             q0_reg + 1    when db_tick='1' else
-    --             q0_reg;
-
-    -- --output logic for the counter
-    -- b_count <= std_logic_vector(q1_reg);
-    -- d_count <= std_logic_vector(q0_reg);
 
 
     -- instantiate hex display time-multiplexing circuit
@@ -122,15 +97,15 @@ begin
   
 
     -- clock divider
-    enable <= '1' when (divide_clk = N) else '0';
-    process(clk) 
-    begin
-        if (clk'event and clk = '1') then 
-            divide_clk <= divide_clk + 1;
-            if (divide_clk = N) then 
-                divide_clk <= 0;
-            end if;
-        end if;
-    end process;
+    -- enable <= '1' when (divide_clk = N) else '0';
+    -- process(clk) 
+    -- begin
+    --     if (clk'event and clk = '1') then 
+    --         divide_clk <= divide_clk + 1;
+    --         if (divide_clk = N) then 
+    --             divide_clk <= 0;
+    --         end if;
+    --     end if;
+    -- end process;
 
 end parking_arch;

@@ -11,7 +11,7 @@ entity db_fsm is
 end db_fsm;
 
 architecture arch of db_fsm is
-   constant N: integer := 20;  -- 2^N * 10ns = 10ms tick --> Número bacana para testar: 22 ou 23
+   constant N: integer := 22;  -- 2^N * 10ns = 10ms tick --> Número bacana para testar: 22 ou 23
     type db_state_type is 
          (zero,wait1_1,wait1_2,wait1_3,one,wait0_1,wait0_2,wait0_3);
    signal q_reg, q_next : unsigned(N-1 downto 0);
