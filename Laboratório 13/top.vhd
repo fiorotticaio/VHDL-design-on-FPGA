@@ -52,24 +52,12 @@ begin
     );
 
 
-    -- edge detection circuits
-    process(clk)
-    begin
-        if (clk'event and clk = '1') then
-            db_reg1  <= db_level1;
-            db_reg2  <= db_level2;
-        end if;
-    end process;
-    db_tick1  <= (not db_reg1) and db_level1;
-    db_tick2  <= (not db_reg2) and db_level2;
-
-
     -- instantiate the enter/exit circuit
     enter_exit_unity : entity work.enter_exit_unity(enter_exit_arch)
     port map (
         clk       => clk,
-        a         => db_tick1,
-        b         => db_tick2,
+        a         => db_level1,
+        b         => db_level2,
         car_enter => up,
         car_exit  => down
     );
