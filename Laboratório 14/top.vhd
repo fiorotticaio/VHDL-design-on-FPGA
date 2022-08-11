@@ -21,10 +21,10 @@ architecture top_arch of top is
     signal pcode : std_logic_vector(1 downto 0);
 
     -- variables for 4 bit incrementer
-    signal inc_out : std_logic_vector(3 downto 0)
+    signal inc_out : std_logic_vector(3 downto 0);
 
     -- variables for multiplexer
-    signal s0, s1, s3, s3 : std_logic;
+    signal s0, s1, s2, s3 : std_logic;
 
     -- variables for flip-flop D
     signal Q0, Q1, Q2, Q3 : std_logic;
@@ -32,10 +32,10 @@ architecture top_arch of top is
 begin
 
     -- initializing variables
-    SHR_in => sw(4);
-    cLD => sw(5);
-    cINC => sw(6);
-    CSHR => sw(7);
+    SHR_in <= sw(4);
+    cLD <= sw(5);
+    cINC <= sw(6);
+    CSHR <= sw(7);
 
     -- instantiate divide clock
     div_clk_unity: entity work.div_clk(Behavioral)
@@ -66,10 +66,10 @@ begin
     -- instantiate multiplexer 0
     mux_4x1_unity0: entity work.mux_4x1(cond_arch)
     port map (
-        i(0) => sw(0),
-        i(1) => sw(1),
+        i(0) => Q0,
+        i(1) => Q1,
         i(2) => inc_out(0),
-        i(3) => Q0,
+        i(3) => sw(0),
         c => pcode,
         s => s0
     );
@@ -77,10 +77,10 @@ begin
     -- instantiate multiplexer 1
     mux_4x1_unity1: entity work.mux_4x1(cond_arch)
     port map (
-        i(0) => sw(1),
-        i(1) => sw(2),
+        i(0) => Q1,
+        i(1) => Q2,
         i(2) => inc_out(1),
-        i(3) => Q1,
+        i(3) => sw(1),
         c => pcode,
         s => s1
     );
@@ -88,10 +88,10 @@ begin
     -- instantiate multiplexer 2
     mux_4x1_unity2: entity work.mux_4x1(cond_arch)
     port map (
-        i(0) => sw(2),
-        i(1) => sw(3),
+        i(0) => Q2,
+        i(1) => Q3,
         i(2) => inc_out(2),
-        i(3) => Q2,
+        i(3) => sw(2),
         c => pcode,
         s => s2
     );
@@ -99,10 +99,10 @@ begin
     -- instantiate multiplexer 3
     mux_4x1_unity3: entity work.mux_4x1(cond_arch)
     port map (
-        i(0) => sw(3),
+        i(0) => Q3,
         i(1) => SHR_in,
         i(2) => inc_out(3),
-        i(3) => Q3,
+        i(3) => sw(3),
         c => pcode,
         s => s3
     );
@@ -144,9 +144,9 @@ begin
     );
 
     -- lighting LEDs
-    led(0) => Q0;
-    led(1) => Q1;
-    led(2) => Q2;
-    led(3) => Q3;
+    led(0) <= Q0;
+    led(1) <= Q1;
+    led(2) <= Q2;
+    led(3) <= Q3;
 
 end top_arch;
